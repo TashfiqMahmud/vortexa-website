@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VORTEXA — Elite Esports Organisation</title>
+<link rel="stylesheet" href="css/base.css"/>
+<link rel="stylesheet" href="css/pages/home.css"/>
+</head>
+<body>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<div id="loader">
+  <div class="loader-title">VORTEXA<div class="loader-fill">VORTEXA</div></div>
+  <div class="loader-sub">// ELITE ESPORTS ORGANISATION</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-pct">0%</div>
+</div>
+
+<!-- TICKER -->
+<div id="ticker">
+  <div class="ticker-tag">⚡ LIVE</div>
+  <div style="overflow:hidden;flex:1;display:flex;padding-left:20px;">
+    <div class="ticker-track">
+      <span class="ticker-item"><span style="display:inline-flex;align-items:center;gap:5px;padding:0 8px;border:1px solid rgba(220,38,38,0.4);background:rgba(220,38,38,0.1);font-family:var(--font-mono);font-size:8px;color:#ef4444;letter-spacing:.15em;"><span class="live-pip"></span>LIVE</span>&nbsp; VTX vs PHX &nbsp;<span class="w">13–8</span>&nbsp;·&nbsp;VALORANT MAP 2</span>
+      <span class="ticker-item">CS2 MAJOR GRAND FINAL &nbsp;·&nbsp; SAT 20:00 UTC &nbsp;·&nbsp; <span class="g">$200,000 PRIZE</span></span>
+      <span class="ticker-item">WORLDS QUALIFIER &nbsp;·&nbsp; VTX <span class="w">2–0</span> NEXTSTRIKE &nbsp;·&nbsp; ADVANCING TO FINALS</span>
+      <span class="ticker-item">RLCS S14 &nbsp;·&nbsp; VTX <span class="l">1–2</span> ORBITAL &nbsp;·&nbsp; SERIES CONTINUES SUNDAY</span>
+      <span class="ticker-item">OVERWATCH 2 OWL &nbsp;·&nbsp; VTX <span class="w">3–1</span> ZENITH &nbsp;·&nbsp; <span class="g">DIVISION LEADERS</span></span>
+      <span class="ticker-item"><span style="display:inline-flex;align-items:center;gap:5px;padding:0 8px;border:1px solid rgba(220,38,38,0.4);background:rgba(220,38,38,0.1);font-family:var(--font-mono);font-size:8px;color:#ef4444;letter-spacing:.15em;"><span class="live-pip"></span>LIVE</span>&nbsp; VTX vs PHX &nbsp;<span class="w">13–8</span>&nbsp;·&nbsp;VALORANT MAP 2</span>
+      <span class="ticker-item">CS2 MAJOR GRAND FINAL &nbsp;·&nbsp; SAT 20:00 UTC &nbsp;·&nbsp; <span class="g">$200,000 PRIZE</span></span>
+      <span class="ticker-item">WORLDS QUALIFIER &nbsp;·&nbsp; VTX <span class="w">2–0</span> NEXTSTRIKE &nbsp;·&nbsp; ADVANCING TO FINALS</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><div class="nav-logo-gem"></div>VORTEXA</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="act">Home</a></li>
+    <li><a href="pages/matches.html">Matches</a></li>
+    <li><a href="pages/roster.html">Roster</a></li>
+    <li><a href="pages/highlights.html">Highlights</a></li>
+    <li><a href="pages/tournament.html">Tournament</a></li>
+    <li><a href="pages/merch.html">Merch</a></li>
+    <li><a href="pages/join.html">Join</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-status"><div class="nav-status-dot"></div>SEASON 4 LIVE</div>
+    <a href="pages/join.html" class="btn btn-gold" style="padding:10px 24px;font-size:11px;">APPLY NOW</a>
+  </div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+
+  <!-- BACKGROUND: dark battlefield -->
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="assets/images/hero-bg.png" alt=""
+      style="width:100%;height:100%;object-fit:cover;opacity:0.3;"/>
+    <!-- gradient overlays to darken edges and blend -->
+    <div style="position:absolute;inset:0;
+      background:
+        linear-gradient(to right, rgba(5,5,7,0.92) 35%, rgba(5,5,7,0.4) 65%, rgba(5,5,7,0.15) 100%),
+        linear-gradient(to top, rgba(5,5,7,1) 0%, transparent 40%),
+        linear-gradient(to bottom, rgba(5,5,7,0.8) 0%, transparent 20%);
+    "></div>
+  </div>
+
+  <!-- THREE.JS particles -->
+  <canvas id="hero-canvas" style="position:absolute;inset:0;z-index:1;pointer-events:none;width:100%;height:100%;"></canvas>
+
+  <!-- FOG -->
+  <div class="hero-fog">
+    <div class="fog-layer"></div>
+    <div class="fog-layer"></div>
+    <div class="fog-layer"></div>
+  </div>
+
+  <!-- WARRIOR CHARACTER — right side, full height, floating -->
+  <div class="hero-character">
+    <div class="hero-smoke-particles"></div>
+    <img
+      class="warrior-img"
+      src="assets/images/warrior.png"
+      alt="VORTEXA Warrior"
+    />
+    <div class="hero-char-glow"></div>
+  </div>
+
+  <!-- TYPOGRAPHY LAYER -->
+  <div class="hero-type">
+    <div class="hero-top">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Elite Esports Organisation &nbsp;·&nbsp; Founded 2021 &nbsp;·&nbsp; Season 4</span>
+      </div>
+      <div style="overflow:hidden;display:block;">
+        <span class="hero-title-top">ESPORT</span>
+      </div>
+      <div style="overflow:hidden;display:block;">
+        <span class="hero-title-bottom">ORGANISATION</span>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hero-desc">
+        <p>Top teams in Valorant, CS2, League of Legends, Rocket League, Overwatch 2 and Fortnite. Powered by ambition and driven by one vision — to make an impact in esports.</p>
+        <div class="hero-ctas">
+          <a href="pages/roster.html" class="btn btn-gold">Meet The Roster</a>
+          <a href="pages/matches.html" class="btn btn-ghost">View Matches</a>
+        </div>
+      </div>
+      <div class="hero-right-info">
+        <div class="hero-stat-item">
+          <span class="hero-stat-num" data-counter data-target="47">0</span>
+          <span class="hero-stat-label">Championships</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num" data-counter data-target="12">0</span>
+          <span class="hero-stat-label">Pro Players</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">$2.4M</span>
+          <span class="hero-stat-label">Prize Earnings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <div class="scroll-arrow"></div>
+    <span class="scroll-label">SCROLL</span>
+  </div>
+</section>
+
+<!-- ══ GAME DIVISIONS ══ -->
+<div class="games-band">
+  <div class="games-band__title">OUR TEAMS — ACTIVE DIVISIONS</div>
+  <div class="games-grid">
+    <div class="game-card" data-r="up" data-delay="0">
+      <div class="game-card__icon"><img src="assets/images/logo-valo.png" alt="Valorant" style="width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(255,70,85,0.5));"/></div>
+      <div class="game-card__name">VALORANT</div>
+      <div class="game-card__rank">VCT Americas</div>
+    </div>
+    <div class="game-card" data-r="up" data-delay="80">
+      <div class="game-card__icon"><img src="assets/images/logo-cs2.png" alt="CS2" style="width:64px;height:44px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(212,170,60,0.4));"/></div>
+      <div class="game-card__name">CS2</div>
+      <div class="game-card__rank">Major Championship</div>
+    </div>
+    <div class="game-card" data-r="up" data-delay="160">
+      <div class="game-card__icon"><img src="assets/images/logo-lol.jpeg" alt="LOL" style="width:80px;height:44px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(180,140,30,0.5));border-radius:3px;"/></div>
+      <div class="game-card__name">LEAGUE</div>
+      <div class="game-card__rank">Worlds Qualifier</div>
+    </div>
+    <div class="game-card" data-r="up" data-delay="240">
+      <div class="game-card__icon"><img src="assets/images/logo-rl.jpeg" alt="Rocket League" style="width:80px;height:44px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,120,255,0.4));border-radius:3px;"/></div>
+      <div class="game-card__name">ROCKET LEAGUE</div>
+      <div class="game-card__rank">RLCS S14</div>
+    </div>
+    <div class="game-card" data-r="up" data-delay="320">
+      <div class="game-card__icon"><img src="assets/images/logo-ow.png" alt="Overwatch 2" style="width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(255,180,28,0.4));"/></div>
+      <div class="game-card__name">OVERWATCH 2</div>
+      <div class="game-card__rank">OWL East Division</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<div class="about-section">
+  <div class="about-left">
+    <div class="about-left__bg-num">01</div>
+    <div class="gold-line ui-label" data-r="left">About VORTEXA</div>
+    <h2 class="about-heading" data-r="left" data-delay="100">BE THE<br/><span>VISION.</span></h2>
+    <p class="body-sm" data-r="left" data-delay="200" style="max-width:420px;margin-bottom:32px;">VORTEXA is an elite esports organisation with top-tier teams across 6 titles. Founded in 2021 with a singular mission: to redefine competitive gaming by fostering resilience, community, and integrity.</p>
+    <p class="body-sm" data-r="left" data-delay="280" style="max-width:420px;margin-bottom:40px;">We exist with purpose — to inspire greatness and create something bigger than ourselves. We do this by nurturing competitive gaming and building champions who carry the VORTEXA signal worldwide.</p>
+    <a href="pages/roster.html" class="btn btn-gold" data-r="left" data-delay="360">View Full Roster →</a>
+  </div>
+  <div class="about-right">
+    <div style="position:absolute;top:-30px;right:var(--gutter);font-family:var(--font-hero);font-size:120px;color:rgba(212,170,60,0.04);line-height:1;pointer-events:none;">VTX</div>
+    <div data-r="right" data-delay="100">
+      <div class="ui-label" style="margin-bottom:12px;">Our Philosophy</div>
+      <blockquote style="font-family:var(--font-hero);font-size:clamp(28px,3.5vw,46px);line-height:.95;color:var(--white);">"The signal never drops."</blockquote>
+    </div>
+    <div class="divider-gold" data-r="fade" data-delay="200"></div>
+    <div data-r="right" data-delay="250">
+      <div class="ui-label" style="margin-bottom:16px;">Active Titles</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.15em;padding:6px 14px;border:1px solid rgba(212,170,60,0.25);color:var(--gold);background:rgba(212,170,60,0.05);">VALORANT</span>
+        <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.15em;padding:6px 14px;border:1px solid rgba(212,170,60,0.25);color:var(--gold);background:rgba(212,170,60,0.05);">CS2</span>
+        <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.15em;padding:6px 14px;border:1px solid rgba(255,255,255,0.1);color:var(--muted2);">LEAGUE OF LEGENDS</span>
+        <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.15em;padding:6px 14px;border:1px solid rgba(255,255,255,0.1);color:var(--muted2);">ROCKET LEAGUE</span>
+        <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.15em;padding:6px 14px;border:1px solid rgba(255,255,255,0.1);color:var(--muted2);">OVERWATCH 2</span>
+        <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.15em;padding:6px 14px;border:1px solid rgba(255,255,255,0.1);color:var(--muted2);">FORTNITE</span>
+      </div>
+    </div>
+    <div class="divider-gold" data-r="fade" data-delay="300"></div>
+    <div data-r="right" data-delay="350">
+      <div class="ui-label" style="margin-bottom:12px;">Founded</div>
+      <div style="font-family:var(--font-hero);font-size:40px;color:var(--white);">2021 <span style="color:var(--gold);">—</span> PRESENT</div>
+      <div class="body-sm" style="margin-top:8px;">3 Continents &nbsp;·&nbsp; 6 Titles &nbsp;·&nbsp; 12 Operators</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STATS ══ -->
+<div class="stat-row">
+  <div class="stat-cell" data-r="up"><span class="stat-cell__num" data-counter data-target="47">0</span><div class="stat-cell__label">Championships</div><div class="stat-cell__corner"></div></div>
+  <div class="stat-cell" data-r="up" data-delay="100"><span class="stat-cell__num" data-counter data-target="12">0</span><div class="stat-cell__label">Pro Players</div><div class="stat-cell__corner"></div></div>
+  <div class="stat-cell" data-r="up" data-delay="200"><span class="stat-cell__num">$2.4M</span><div class="stat-cell__label">Total Prize Earnings</div><div class="stat-cell__corner"></div></div>
+  <div class="stat-cell" data-r="up" data-delay="300"><span class="stat-cell__num" data-counter data-target="48000">0</span><div class="stat-cell__label">Community Members</div><div class="stat-cell__corner"></div></div>
+</div>
+
+<!-- ══ PLAYERS ══ -->
+<div class="players-section">
+  <div class="section-header">
+    <div>
+      <div class="gold-line ui-label" data-r="up" style="margin-bottom:12px;">Our Roster</div>
+      <h2 class="hero-md" data-r="up" data-delay="100">MEET THE<br/>OPERATORS</h2>
+    </div>
+    <a href="pages/roster.html" class="btn btn-ghost" data-r="up" data-delay="200">Full Roster →</a>
+  </div>
+  <div class="players-grid">
+    <!-- Player 1: red neon male -->
+    <div class="player-card" data-tilt data-r="up">
+      <div class="player-card__visual">
+        <div class="player-card__scan"></div>
+        <img src="assets/images/player1.png" alt="Marcus Chen"/>
+        <div class="player-card__glow"></div>
+      </div>
+      <div class="player-card__info">
+        <div class="player-card__role">IGL / Duelist · Valorant</div>
+        <div class="player-card__name">MARCUS CHEN</div>
+        <div class="player-card__handle">@VOLT_VTX</div>
+        <div class="player-card__stats">
+          <div class="pc-stat"><span class="pc-stat-val">1.87</span><div class="pc-stat-key">K/D</div></div>
+          <div class="pc-stat"><span class="pc-stat-val">94%</span><div class="pc-stat-key">HS%</div></div>
+          <div class="pc-stat"><span class="pc-stat-val">#3</span><div class="pc-stat-key">RANK</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Player 2: purple female -->
+    <div class="player-card" data-tilt data-r="up" data-delay="100">
+      <div class="player-card__visual">
+        <div class="player-card__scan" style="animation-delay:.8s"></div>
+        <img src="assets/images/player2.png" alt="Anya Volkov"/>
+        <div class="player-card__glow"></div>
+      </div>
+      <div class="player-card__info">
+        <div class="player-card__role">Entry Fragger · Valorant</div>
+        <div class="player-card__name">ANYA VOLKOV</div>
+        <div class="player-card__handle">@REAPER_VTX</div>
+        <div class="player-card__stats">
+          <div class="pc-stat"><span class="pc-stat-val">2.09</span><div class="pc-stat-key">K/D</div></div>
+          <div class="pc-stat"><span class="pc-stat-val">91%</span><div class="pc-stat-key">HS%</div></div>
+          <div class="pc-stat"><span class="pc-stat-val">#2</span><div class="pc-stat-key">RANK</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Player 3: green/orange male cropped -->
+    <div class="player-card" data-tilt data-r="up" data-delay="200">
+      <div class="player-card__visual">
+        <div class="player-card__scan" style="animation-delay:1.6s"></div>
+        <img src="assets/images/player3.png" alt="Diego Reyes"/>
+        <div class="player-card__glow"></div>
+      </div>
+      <div class="player-card__info">
+        <div class="player-card__role">Mid Lane · League of Legends</div>
+        <div class="player-card__name">DIEGO REYES</div>
+        <div class="player-card__handle">@BLAZE_VTX</div>
+        <div class="player-card__stats">
+          <div class="pc-stat"><span class="pc-stat-val">12.4</span><div class="pc-stat-key">KDA</div></div>
+          <div class="pc-stat"><span class="pc-stat-val">82%</span><div class="pc-stat-key">WIN%</div></div>
+          <div class="pc-stat"><span class="pc-stat-val">#7</span><div class="pc-stat-key">RANK</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Player 4: blue/red male cropped -->
+    <div class="player-card" data-tilt data-r="up" data-delay="300">
+      <div class="player-card__visual">
+        <div class="player-card__scan" style="animation-delay:2.4s"></div>
+        <img src="assets/images/player4.png" alt="Yuki Tanaka"/>
+        <div class="player-card__glow"></div>
+      </div>
+      <div class="player-card__info">
+        <div class="player-card__role">AWPer / Sniper · CS2</div>
+        <div class="player-card__name">YUKI TANAKA</div>
+        <div class="player-card__handle">@PHANTOM_VTX</div>
+        <div class="player-card__stats">
+          <div class="pc-stat"><span class="pc-stat-val">2.31</span><div class="pc-stat-key">K/D</div></div>
+          <div class="pc-stat"><span class="pc-stat-val">78%</span><div class="pc-stat-key">ACC</div></div>
+          <div class="pc-stat"><span class="pc-stat-val">#1</span><div class="pc-stat-key">RANK</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MATCHES ══ -->
+<div class="matches-section">
+  <div class="section-header" style="margin-bottom:40px;">
+    <div>
+      <div class="gold-line ui-label" data-r="up" style="margin-bottom:12px;">Schedule</div>
+      <h2 class="hero-md" data-r="up" data-delay="100">LATEST<br/>MATCHES</h2>
+    </div>
+    <a href="pages/matches.html" class="btn btn-ghost" data-r="up" data-delay="200">All Matches →</a>
+  </div>
+  <div class="match-row" data-r="up">
+    <div class="match-row__game"><img src="assets/images/logo-valo.png" style="width:32px;height:32px;object-fit:contain;"/><div class="match-row__game-name">VALORANT</div><div class="match-row__event">VCT AMERICAS</div></div>
+    <div class="match-row__teams">
+      <div class="match-row__team"><span class="match-row__tag match-row__tag--vtx">VTX</span><span class="match-row__tname">VORTEXA</span></div>
+      <div class="match-row__score match-row__score--live">13 : 8</div>
+      <div class="match-row__team" style="text-align:right;"><span class="match-row__tag">PHX</span><span class="match-row__tname">PHANTOM X</span></div>
+    </div>
+    <div class="match-row__meta"><div class="live-pill"><div class="live-pip"></div>LIVE · MAP 2</div><div class="match-row__prize">$50,000</div></div>
+  </div>
+  <div class="match-row" data-r="up" data-delay="80">
+    <div class="match-row__game"><img src="assets/images/logo-cs2.png" style="width:40px;height:28px;object-fit:contain;"/><div class="match-row__game-name">CS2</div><div class="match-row__event">MAJOR CHAMPIONSHIP</div></div>
+    <div class="match-row__teams">
+      <div class="match-row__team"><span class="match-row__tag match-row__tag--vtx">VTX</span><span class="match-row__tname">VORTEXA</span></div>
+      <div class="match-row__score">VS</div>
+      <div class="match-row__team" style="text-align:right;"><span class="match-row__tag">NST</span><span class="match-row__tname">NEXTSTRIKE</span></div>
+    </div>
+    <div class="match-row__meta"><div class="match-row__time">SAT · 20:00 UTC</div><div class="match-row__prize">$200,000</div></div>
+  </div>
+  <div class="match-row" data-r="up" data-delay="160">
+    <div class="match-row__game"><img src="assets/images/logo-lol.jpeg" style="width:56px;height:28px;object-fit:contain;border-radius:2px;"/><div class="match-row__game-name">LEAGUE</div><div class="match-row__event">WORLDS QUALIFIER</div></div>
+    <div class="match-row__teams">
+      <div class="match-row__team"><span class="match-row__tag match-row__tag--vtx">VTX</span><span class="match-row__tname">VORTEXA</span></div>
+      <div class="match-row__score" style="color:#4ade80;">2 : 0</div>
+      <div class="match-row__team" style="text-align:right;"><span class="match-row__tag">NST</span><span class="match-row__tname">NEXTSTRIKE</span></div>
+    </div>
+    <div class="match-row__meta"><div class="match-row__time" style="color:#4ade80;">WIN — ADVANCING</div><div class="match-row__prize">$150,000</div></div>
+  </div>
+  <div class="match-row" data-r="up" data-delay="240">
+    <div class="match-row__game"><img src="assets/images/logo-rl.jpeg" style="width:56px;height:28px;object-fit:contain;border-radius:2px;"/><div class="match-row__game-name">ROCKET LEAGUE</div><div class="match-row__event">RLCS SEASON 14</div></div>
+    <div class="match-row__teams">
+      <div class="match-row__team"><span class="match-row__tag match-row__tag--vtx">VTX</span><span class="match-row__tname">VORTEXA</span></div>
+      <div class="match-row__score" style="color:#f87171;">1 : 2</div>
+      <div class="match-row__team" style="text-align:right;"><span class="match-row__tag">OBT</span><span class="match-row__tname">ORBITAL</span></div>
+    </div>
+    <div class="match-row__meta"><div class="match-row__time">SUN · 18:00 UTC</div><div class="match-row__prize">$75,000</div></div>
+  </div>
+</div>
+
+<!-- ══ VIDEO ══ -->
+<div class="video-section" data-r="fade">
+  <div class="video-screen">
+    <img src="assets/images/highlights-thumb.png" alt="VORTEXA Highlights"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.75;z-index:1;"/>
+    <div class="video-screen__overlay" style="z-index:2;"></div>
+    <div class="video-hud-corner vhc-tl"></div>
+    <div class="video-hud-corner vhc-tr"></div>
+    <div class="video-hud-corner vhc-bl"></div>
+    <div class="video-hud-corner vhc-br"></div>
+    <div class="video-hud-label">VORTEXA // SEASON 4 — OFFICIAL HIGHLIGHT REEL</div>
+    <button class="video-play-btn" id="vidPlayBtn">
+      <div class="play-ring"></div><div class="play-ring"></div><div class="play-ring"></div>
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+  </div>
+  <div class="video-info-bar">
+    <div class="video-stat"><span class="video-stat__val">4.7M</span><div class="video-stat__key">TOTAL VIEWS</div></div>
+    <div class="video-stat"><span class="video-stat__val" data-counter data-target="247">0</span><div class="video-stat__key">HIGHLIGHT CLIPS</div></div>
+    <div class="video-stat"><span class="video-stat__val">98%</span><div class="video-stat__key">CLUTCH WIN RATE</div></div>
+    <div class="video-stat"><span class="video-stat__val">S4</span><div class="video-stat__key">CURRENT SEASON</div></div>
+  </div>
+</div>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-outer" style="background:var(--black);border-top:1px solid rgba(212,170,60,0.08);border-bottom:1px solid rgba(212,170,60,0.08);">
+  <div class="marquee-track">
+    <span class="marquee-item">VALORANT</span><span class="marquee-item marquee-item--gold">CHAMPIONS</span>
+    <span class="marquee-item">CS2</span><span class="marquee-item marquee-item--gold">MAJOR</span>
+    <span class="marquee-item">LEAGUE OF LEGENDS</span><span class="marquee-item marquee-item--gold">WORLDS</span>
+    <span class="marquee-item">ROCKET LEAGUE</span><span class="marquee-item marquee-item--gold">RLCS</span>
+    <span class="marquee-item">OVERWATCH 2</span><span class="marquee-item marquee-item--gold">OWL</span>
+    <span class="marquee-item">FORTNITE</span><span class="marquee-item marquee-item--gold">FNCS</span>
+    <span class="marquee-item">VALORANT</span><span class="marquee-item marquee-item--gold">CHAMPIONS</span>
+    <span class="marquee-item">CS2</span><span class="marquee-item marquee-item--gold">MAJOR</span>
+    <span class="marquee-item">LEAGUE OF LEGENDS</span><span class="marquee-item marquee-item--gold">WORLDS</span>
+    <span class="marquee-item">ROCKET LEAGUE</span><span class="marquee-item marquee-item--gold">RLCS</span>
+  </div>
+</div>
+
+<!-- ══ SPONSORS ══ -->
+<div style="background:var(--black);padding:60px var(--gutter);border-bottom:1px solid rgba(212,170,60,0.08);">
+  <div class="ui-label" style="text-align:center;color:var(--muted);margin-bottom:40px;" data-r="up">PROUD PARTNERS &amp; SPONSORS</div>
+  <div class="marquee-outer">
+    <div class="marquee-track" style="animation-direction:reverse;">
+      <span class="marquee-item">HYPERX</span><span class="marquee-item marquee-item--gold">ASUS ROG</span>
+      <span class="marquee-item">ALIENWARE</span><span class="marquee-item marquee-item--gold">LOGITECH G</span>
+      <span class="marquee-item">NVIDIA</span><span class="marquee-item marquee-item--gold">RED BULL</span>
+      <span class="marquee-item">STEELSERIES</span><span class="marquee-item marquee-item--gold">CORSAIR</span>
+      <span class="marquee-item">SECRETLAB</span><span class="marquee-item marquee-item--gold">RAZER</span>
+      <span class="marquee-item">HYPERX</span><span class="marquee-item marquee-item--gold">ASUS ROG</span>
+      <span class="marquee-item">ALIENWARE</span><span class="marquee-item marquee-item--gold">LOGITECH G</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ JOIN CTA ══ -->
+<div class="join-cta" data-r="scale">
+  <div class="join-cta__bg"></div>
+  <div class="join-cta__bg-word">APPLY</div>
+  <div class="join-cta__inner">
+    <div class="gold-line ui-label" style="justify-content:center;margin-bottom:16px;">Recruitment Open</div>
+    <h2>THINK YOU'RE<br/><span>BUILT FOR THIS?</span></h2>
+    <p class="body-sm" style="max-width:440px;margin:0 auto 40px;">We scout elite talent across all titles. Submit your application before June 30, 2026.</p>
+    <a href="pages/join.html" class="btn btn-gold" style="font-size:14px;padding:18px 52px;">Submit Application →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div>
+      <span class="footer-logo">VORT<span>E</span>XA</span>
+      <div class="footer-tag">// Signal. Speed. Supremacy.</div>
+      <div class="footer-socials">
+        <a href="#" class="footer-soc">𝕏</a><a href="#" class="footer-soc">in</a>
+        <a href="#" class="footer-soc">▶</a><a href="#" class="footer-soc">📸</a>
+        <a href="#" class="footer-soc">💬</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li><li><a href="pages/matches.html">Matches</a></li>
+        <li><a href="pages/roster.html">Roster</a></li><li><a href="pages/highlights.html">Highlights</a></li>
+        <li><a href="pages/tournament.html">Tournament</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Organization</div>
+      <ul class="footer-links">
+        <li><a href="#">About</a></li><li><a href="pages/merch.html">Merch</a></li>
+        <li><a href="pages/join.html">Careers</a></li><li><a href="#">Partners</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a href="#">Contact</a></li><li><a href="#">FAQ</a></li>
+        <li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 VORTEXA ESPORTS. ALL RIGHTS RESERVED.</div>
+    <div class="nav-status"><div class="nav-status-dot"></div>ALL SYSTEMS OPERATIONAL</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/three-bg.js"></script>
+<script src="js/core.js"></script>
+<script>
+document.getElementById('vidPlayBtn').addEventListener('click', function(){
+  const p = this.querySelector('path');
+  if(p.getAttribute('d')==='M8 5v14l11-7z'){
+    p.setAttribute('d','M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+    this.style.background='rgba(212,170,60,0.25)';
+  } else {
+    p.setAttribute('d','M8 5v14l11-7z');
+    this.style.background='rgba(212,170,60,0.1)';
+  }
+});
+</script>
+</body>
+</html>

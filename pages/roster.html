@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VORTEXA — Roster</title>
+<link rel="stylesheet" href="../css/base.css"/>
+<style>
+.page-hero{min-height:42vh;padding:calc(26px+64px+60px) var(--gutter) 60px;position:relative;z-index:2;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to bottom,rgba(0,0,0,0.4),var(--void));}
+.page-hero__bg-word{position:absolute;right:-20px;bottom:-60px;font-family:var(--font-hero);font-size:clamp(140px,22vw,320px);color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;}
+.page-hero__title{font-family:var(--font-hero);font-size:clamp(64px,12vw,160px);line-height:.85;}
+.sticky-bar{position:sticky;top:calc(26px+64px);z-index:100;background:rgba(5,5,7,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,170,60,0.1);padding:0 var(--gutter);display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+.sticky-bar::-webkit-scrollbar{display:none;}
+.stab{font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;color:var(--muted2);background:none;border:none;border-bottom:2px solid transparent;padding:16px 22px;cursor:none;white-space:nowrap;transition:all .2s;text-transform:uppercase;}
+.stab:hover{color:var(--white);}.stab.on{color:var(--gold);border-bottom-color:var(--gold);}
+.roster-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(212,170,60,0.06);margin-top:32px;}
+.pcard{position:relative;overflow:hidden;background:var(--smoke);cursor:none;transition:all .4s;}
+.pcard:hover{transform:translateY(-8px);z-index:3;}
+.pcard::before{content:'';position:absolute;inset:0;border:1px solid transparent;transition:border-color .4s;z-index:2;pointer-events:none;}
+.pcard:hover::before{border-color:rgba(212,170,60,0.35);}
+.pcard__vis{height:260px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:72px;}
+.pcard__vis::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,var(--smoke),transparent);}
+.pcard__scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:sc 3s linear infinite;}
+@keyframes sc{from{top:-1px;}to{top:100%;}}
+.pcard__glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:120px;height:60px;background:radial-gradient(ellipse,rgba(212,170,60,0.2),transparent 70%);filter:blur(8px);opacity:0;transition:opacity .4s;}
+.pcard:hover .pcard__glow{opacity:1;}
+.pcard__info{padding:20px;border-top:1px solid rgba(255,255,255,0.04);}
+.pcard__role{font-family:var(--font-mono);font-size:8px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;}
+.pcard__name{font-family:var(--font-hero);font-size:22px;letter-spacing:.03em;margin-bottom:2px;}
+.pcard__handle{font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:14px;}
+.pcard__stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,0.04);}
+.ps{background:var(--deep);padding:8px;text-align:center;}
+.ps-v{font-family:var(--font-hero);font-size:18px;display:block;line-height:1;}
+.ps-k{font-family:var(--font-mono);font-size:7px;color:var(--muted);letter-spacing:.12em;margin-top:3px;}
+.pcard__barcode{padding:10px 16px;border-top:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:12px;}
+.barcode{flex:1;height:22px;display:flex;align-items:center;gap:2px;}
+.bc-lbl{font-family:var(--font-mono);font-size:7px;color:var(--muted);letter-spacing:.12em;white-space:nowrap;}
+.staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(212,170,60,0.06);margin-top:32px;}
+.sc2{background:var(--smoke);padding:28px;transition:all .3s;position:relative;}
+.sc2::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .3s;}
+.sc2:hover::before{transform:scaleX(1);}
+.sc2:hover{background:rgba(212,170,60,0.03);}
+.sc2__icon{font-size:28px;margin-bottom:14px;display:block;}
+.sc2__name{font-family:var(--font-hero);font-size:20px;margin-bottom:4px;letter-spacing:.03em;}
+.sc2__title{font-family:var(--font-mono);font-size:8px;color:var(--gold);letter-spacing:.2em;margin-bottom:10px;}
+@media(max-width:1100px){.roster-grid{grid-template-columns:repeat(2,1fr);}.staff-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:580px){.roster-grid{grid-template-columns:1fr;}.staff-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="cur-dot"></div><div id="cur-ring"></div>
+<canvas id="three-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+<div id="loader"><div class="loader-title">ROSTER<div class="loader-fill">ROSTER</div></div><div class="loader-sub">// LOADING OPERATOR FILES</div><div class="loader-bar-wrap"><div class="loader-bar"></div></div><div class="loader-pct">0%</div></div>
+<div id="ticker"><div class="ticker-tag">⚡ LIVE</div><div style="overflow:hidden;flex:1;display:flex;padding-left:20px;"><div class="ticker-track"><span class="ticker-item">VTX vs PHX <span class="w">13–8</span> · VALORANT MAP 2 LIVE</span><span class="ticker-item">CS2 MAJOR GRAND FINAL · SAT 20:00 · <span class="g">$200K</span></span><span class="ticker-item">VTX vs PHX <span class="w">13–8</span> · VALORANT MAP 2 LIVE</span><span class="ticker-item">CS2 MAJOR GRAND FINAL · SAT 20:00 · <span class="g">$200K</span></span></div></div></div>
+<nav id="nav">
+  <a href="../index.html" class="nav-logo"><div class="nav-logo-gem"></div>VORTEXA</a>
+  <ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="matches.html">Matches</a></li><li><a href="roster.html" class="act">Roster</a></li><li><a href="highlights.html">Highlights</a></li><li><a href="tournament.html">Tournament</a></li><li><a href="merch.html">Merch</a></li><li><a href="join.html">Join</a></li></ul>
+  <div class="nav-right"><div class="nav-status"><div class="nav-status-dot"></div>SEASON 4 LIVE</div><a href="join.html" class="btn btn-gold" style="padding:10px 24px;font-size:11px;">APPLY NOW</a></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero__bg-word">ROSTER</div>
+  <div class="gold-line ui-label" data-r="up" style="margin-bottom:12px;">The Operators</div>
+  <h1 class="page-hero__title" data-r="up" data-delay="80">ROSTER</h1>
+  <p style="font-family:var(--font-body);font-size:15px;font-weight:300;color:var(--muted2);margin-top:16px;max-width:500px;" data-r="up" data-delay="160">Twelve elite operators. Six titles. Three continents. One signal.</p>
+</div>
+
+<div class="sticky-bar">
+  <button class="stab on">All Divisions</button><button class="stab">Valorant</button><button class="stab">CS2</button><button class="stab">League</button><button class="stab">Rocket League</button><button class="stab">OW2</button><button class="stab">Staff</button>
+</div>
+
+<!-- VALORANT -->
+<section style="position:relative;z-index:2;background:var(--void);padding:60px var(--gutter);">
+  <div class="gold-line ui-label" data-r="up" style="margin-bottom:6px;">Valorant Division</div>
+  <div style="font-family:var(--font-hero);font-size:32px;color:var(--white);margin-bottom:0;" data-r="up" data-delay="80">VCT AMERICAS</div>
+  <div class="roster-grid">
+    <div class="pcard" data-r="up"><div class="pcard__vis" style="padding:0;"><div class="pcard__scan"></div><img src="../assets/images/player1.png" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;"/><div class="pcard__glow"></div></div><div class="pcard__info"><div class="pcard__role">IGL / Duelist</div><div class="pcard__name">MARCUS CHEN</div><div class="pcard__handle">@VOLT_VTX · 🇨🇦 AGE 22</div><div class="pcard__stats"><div class="ps"><span class="ps-v">1.87</span><div class="ps-k">K/D</div></div><div class="ps"><span class="ps-v">94%</span><div class="ps-k">HS%</div></div><div class="ps"><span class="ps-v">#3</span><div class="ps-k">RANK</div></div></div></div><div class="pcard__barcode"><div class="barcode"></div><span class="bc-lbl">RADIANT #3</span></div></div>
+    <div class="pcard" data-r="up" data-delay="80"><div class="pcard__vis" style="background:linear-gradient(160deg,#0d0005,var(--void));"><div class="pcard__scan" style="animation-delay:.7s"></div><span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(212,170,60,0.4));">💀</span><div class="pcard__glow"></div></div><div class="pcard__info"><div class="pcard__role">Entry Fragger</div><div class="pcard__name">ANYA VOLKOV</div><div class="pcard__handle">@REAPER_VTX · 🇷🇺 AGE 20</div><div class="pcard__stats"><div class="ps"><span class="ps-v">2.09</span><div class="ps-k">K/D</div></div><div class="ps"><span class="ps-v">91%</span><div class="ps-k">HS%</div></div><div class="ps"><span class="ps-v">#2</span><div class="ps-k">RANK</div></div></div></div><div class="pcard__barcode"><div class="barcode"></div><span class="bc-lbl">RADIANT #2</span></div></div>
+    <div class="pcard" data-r="up" data-delay="160"><div class="pcard__vis" style="background:linear-gradient(160deg,#050d0d,var(--void));"><div class="pcard__scan" style="animation-delay:1.4s"></div><span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(212,170,60,0.35));">🌀</span><div class="pcard__glow"></div></div><div class="pcard__info"><div class="pcard__role">Sentinel / Anchor</div><div class="pcard__name">KWAME ASANTE</div><div class="pcard__handle">@STORM_VTX · 🇬🇭 AGE 24</div><div class="pcard__stats"><div class="ps"><span class="ps-v">1.64</span><div class="ps-k">K/D</div></div><div class="ps"><span class="ps-v">76%</span><div class="ps-k">HS%</div></div><div class="ps"><span class="ps-v">#8</span><div class="ps-k">RANK</div></div></div></div><div class="pcard__barcode"><div class="barcode"></div><span class="bc-lbl">IMMORTAL 3</span></div></div>
+    <div class="pcard" data-r="up" data-delay="240"><div class="pcard__vis" style="background:linear-gradient(160deg,#08000d,var(--void));"><div class="pcard__scan" style="animation-delay:2.1s"></div><span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(212,170,60,0.35));">🔱</span><div class="pcard__glow"></div></div><div class="pcard__info"><div class="pcard__role">Controller / Smoke</div><div class="pcard__name">PRIYA SHARMA</div><div class="pcard__handle">@WRAITH_VTX · 🇮🇳 AGE 21</div><div class="pcard__stats"><div class="ps"><span class="ps-v">1.72</span><div class="ps-k">K/D</div></div><div class="ps"><span class="ps-v">68%</span><div class="ps-k">HS%</div></div><div class="ps"><span class="ps-v">#11</span><div class="ps-k">RANK</div></div></div></div><div class="pcard__barcode"><div class="barcode"></div><span class="bc-lbl">RADIANT #11</span></div></div>
+  </div>
+</section>
+
+<!-- CS2 -->
+<section style="position:relative;z-index:2;background:var(--deep);padding:60px var(--gutter);">
+  <div class="gold-line ui-label" data-r="up" style="margin-bottom:6px;">CS2 Division</div>
+  <div style="font-family:var(--font-hero);font-size:32px;color:var(--white);margin-bottom:0;" data-r="up" data-delay="80">MAJOR CHAMPIONSHIP</div>
+  <div class="roster-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="pcard" data-r="up"><div class="pcard__vis" style="padding:0;"><div class="pcard__scan"></div><img src="../assets/images/player4.png" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;"/><div class="pcard__glow"></div></div><div class="pcard__info"><div class="pcard__role">AWPer / Sniper</div><div class="pcard__name">YUKI TANAKA</div><div class="pcard__handle">@PHANTOM_VTX · 🇯🇵 AGE 23</div><div class="pcard__stats"><div class="ps"><span class="ps-v">2.31</span><div class="ps-k">K/D</div></div><div class="ps"><span class="ps-v">78%</span><div class="ps-k">ACC</div></div><div class="ps"><span class="ps-v">#1</span><div class="ps-k">RANK</div></div></div></div><div class="pcard__barcode"><div class="barcode"></div><span class="bc-lbl">FACEIT LVL 10</span></div></div>
+    <div class="pcard" data-r="up" data-delay="80"><div class="pcard__vis" style="padding:0;"><div class="pcard__scan" style="animation-delay:.9s"></div><img src="../assets/images/player3.png" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;"/><div class="pcard__glow"></div></div><div class="pcard__info"><div class="pcard__role">Rifler / IGL</div><div class="pcard__name">ALEKSEI PETROV</div><div class="pcard__handle">@NOVA_VTX · 🇺🇦 AGE 25</div><div class="pcard__stats"><div class="ps"><span class="ps-v">1.94</span><div class="ps-k">K/D</div></div><div class="ps"><span class="ps-v">71%</span><div class="ps-k">ACC</div></div><div class="ps"><span class="ps-v">#4</span><div class="ps-k">RANK</div></div></div></div><div class="pcard__barcode"><div class="barcode"></div><span class="bc-lbl">FACEIT LVL 10</span></div></div>
+  </div>
+</section>
+
+<!-- LOL -->
+<section style="position:relative;z-index:2;background:var(--void);padding:60px var(--gutter);">
+  <div class="gold-line ui-label" data-r="up" style="margin-bottom:6px;">League of Legends Division</div>
+  <div style="font-family:var(--font-hero);font-size:32px;color:var(--white);margin-bottom:0;" data-r="up" data-delay="80">WORLDS QUALIFIER</div>
+  <div class="roster-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="pcard" data-r="up"><div class="pcard__vis" style="background:linear-gradient(160deg,#0d0800,var(--void));"><div class="pcard__scan"></div><span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(212,170,60,0.4));">🔥</span><div class="pcard__glow"></div></div><div class="pcard__info"><div class="pcard__role">Mid Lane / Carry</div><div class="pcard__name">DIEGO REYES</div><div class="pcard__handle">@BLAZE_VTX · 🇲🇽 AGE 22</div><div class="pcard__stats"><div class="ps"><span class="ps-v">12.4</span><div class="ps-k">KDA</div></div><div class="ps"><span class="ps-v">82%</span><div class="ps-k">WIN%</div></div><div class="ps"><span class="ps-v">#7</span><div class="ps-k">RANK</div></div></div></div><div class="pcard__barcode"><div class="barcode"></div><span class="bc-lbl">CHALLENGER</span></div></div>
+    <div class="pcard" data-r="up" data-delay="80"><div class="pcard__vis" style="background:linear-gradient(160deg,#000d08,var(--void));"><div class="pcard__scan" style="animation-delay:.6s"></div><span style="position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(212,170,60,0.35));">🛡️</span><div class="pcard__glow"></div></div><div class="pcard__info"><div class="pcard__role">Support / Vision</div><div class="pcard__name">JIN-HO PARK</div><div class="pcard__handle">@SHIELD_VTX · 🇰🇷 AGE 24</div><div class="pcard__stats"><div class="ps"><span class="ps-v">8.9</span><div class="ps-k">KDA</div></div><div class="ps"><span class="ps-v">79%</span><div class="ps-k">WIN%</div></div><div class="ps"><span class="ps-v">#12</span><div class="ps-k">RANK</div></div></div></div><div class="pcard__barcode"><div class="barcode"></div><span class="bc-lbl">CHALLENGER</span></div></div>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section style="position:relative;z-index:2;background:var(--deep);padding:60px var(--gutter);">
+  <div class="gold-line ui-label" data-r="up" style="margin-bottom:6px;">Coaching Staff</div>
+  <div style="font-family:var(--font-hero);font-size:32px;color:var(--white);margin-bottom:32px;" data-r="up" data-delay="80">THE TEAM BEHIND THE TEAM</div>
+  <div class="staff-grid">
+    <div class="sc2" data-r="up"><span class="sc2__icon">🧠</span><div class="sc2__name">RAFAEL TORRES</div><div class="sc2__title">HEAD COACH</div><p style="font-family:var(--font-body);font-size:13px;color:var(--muted2);font-weight:300;line-height:1.7;">10 years coaching. Former pro player, 3x Major champion. Architect of VORTEXA's playstyle.</p></div>
+    <div class="sc2" data-r="up" data-delay="80"><span class="sc2__icon">📊</span><div class="sc2__name">SOPHIE LAURENT</div><div class="sc2__title">HEAD ANALYST</div><p style="font-family:var(--font-body);font-size:13px;color:var(--muted2);font-weight:300;line-height:1.7;">Data-driven strategist. Developed VORTEXA's unique aggression system.</p></div>
+    <div class="sc2" data-r="up" data-delay="160"><span class="sc2__icon">🏋️</span><div class="sc2__name">DR. HANA YOSHIDA</div><div class="sc2__title">PERFORMANCE COACH</div><p style="font-family:var(--font-body);font-size:13px;color:var(--muted2);font-weight:300;line-height:1.7;">Sports psychology & physical performance specialist. Keeps operators at peak condition.</p></div>
+    <div class="sc2" data-r="up" data-delay="240"><span class="sc2__icon">🎙️</span><div class="sc2__name">JAMES OKAFOR</div><div class="sc2__title">CONTENT DIRECTOR</div><p style="font-family:var(--font-body);font-size:13px;color:var(--muted2);font-weight:300;line-height:1.7;">Former broadcaster. Runs our media empire across all platforms. 4.7M views and counting.</p></div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-grid"><div><span class="footer-logo">VORT<span>E</span>XA</span><div class="footer-tag">// Signal. Speed. Supremacy.</div><div class="footer-socials"><a href="#" class="footer-soc">𝕏</a><a href="#" class="footer-soc">▶</a><a href="#" class="footer-soc">📸</a></div></div>
+  <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../index.html">Home</a></li><li><a href="matches.html">Matches</a></li><li><a href="roster.html">Roster</a></li><li><a href="highlights.html">Highlights</a></li></ul></div>
+  <div><div class="footer-col-title">Organization</div><ul class="footer-links"><li><a href="merch.html">Merch</a></li><li><a href="join.html">Join</a></li><li><a href="tournament.html">Tournament</a></li></ul></div>
+  <div><div class="footer-col-title">Support</div><ul class="footer-links"><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div></div>
+  <div class="footer-bottom"><div class="footer-copy">© 2026 VORTEXA ESPORTS.</div><div class="nav-status"><div class="nav-status-dot"></div>ALL SYSTEMS OPERATIONAL</div></div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="../js/three-bg.js"></script><script src="../js/core.js"></script>
+<script>document.querySelectorAll('.stab').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('on'));this.classList.add('on');}));</script>
+</body></html>

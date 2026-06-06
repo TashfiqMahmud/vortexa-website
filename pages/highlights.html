@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VORTEXA — Highlights</title>
+<link rel="stylesheet" href="../css/base.css"/>
+<style>
+.page-hero{min-height:42vh;padding:calc(26px + 64px + 60px) var(--gutter) 60px;position:relative;z-index:2;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to bottom,rgba(0,0,0,0.4),var(--void));}
+.page-hero__bg-word{position:absolute;right:-20px;bottom:-60px;font-family:var(--font-hero);font-size:clamp(140px,22vw,320px);color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;}
+.page-hero__title{font-family:var(--font-hero);font-size:clamp(64px,12vw,160px);line-height:.85;}
+.feat-vid{position:relative;background:var(--black);}
+.feat-screen{aspect-ratio:21/9;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.feat-screen canvas{position:absolute;inset:0;width:100%;height:100%;}
+.feat-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.5),transparent 40%),linear-gradient(to top,rgba(0,0,0,0.7),transparent 40%);}
+.hud-c{position:absolute;width:40px;height:40px;}
+.hud-tl{top:16px;left:16px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);}
+.hud-tr{top:16px;right:16px;border-top:2px solid var(--gold);border-right:2px solid var(--gold);}
+.hud-bl{bottom:16px;left:16px;border-bottom:2px solid var(--gold);border-left:2px solid var(--gold);}
+.hud-br{bottom:16px;right:16px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);}
+.hud-lbl{position:absolute;top:16px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:9px;color:rgba(212,170,60,0.6);letter-spacing:.3em;white-space:nowrap;}
+.play-btn{width:76px;height:76px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(212,170,60,0.1);backdrop-filter:blur(8px);cursor:none;transition:all .3s;position:relative;z-index:3;}
+.play-btn:hover{background:var(--gold);box-shadow:0 0 50px rgba(212,170,60,0.5);transform:scale(1.1);}
+.play-btn:hover svg{fill:var(--black);}
+.play-btn svg{fill:var(--gold);width:26px;height:26px;margin-left:4px;}
+.pr{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(212,170,60,.3);animation:ro 2s ease-out infinite;}
+.pr:nth-child(2){animation-delay:.5s;}.pr:nth-child(3){animation-delay:1s;}
+@keyframes ro{0%{transform:scale(1);opacity:.8;}100%{transform:scale(2.4);opacity:0;}}
+.vstat-bar{display:flex;background:var(--smoke);border-top:1px solid rgba(212,170,60,0.12);}
+.vstat{flex:1;padding:22px;text-align:center;border-right:1px solid rgba(255,255,255,0.04);}
+.vstat:last-child{border-right:none;}
+.vstat__v{font-family:var(--font-hero);font-size:28px;color:var(--gold);display:block;line-height:1;}
+.vstat__k{font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:.2em;margin-top:4px;}
+.clips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(212,170,60,0.06);}
+.clip{position:relative;overflow:hidden;background:var(--smoke);cursor:none;transition:all .35s;}
+.clip:hover{transform:translateY(-6px);z-index:3;}
+.clip::before{content:'';position:absolute;inset:0;border:1px solid transparent;transition:border-color .3s;z-index:2;pointer-events:none;}
+.clip:hover::before{border-color:rgba(212,170,60,0.35);}
+.clip__thumb{aspect-ratio:16/9;background:linear-gradient(135deg,var(--deep),var(--void));display:flex;align-items:center;justify-content:center;position:relative;}
+.clip__phc{position:absolute;width:18px;height:18px;}
+.clip__phc-tl{top:8px;left:8px;border-top:1px solid rgba(212,170,60,0.4);border-left:1px solid rgba(212,170,60,0.4);}
+.clip__phc-br{bottom:8px;right:8px;border-bottom:1px solid rgba(212,170,60,0.4);border-right:1px solid rgba(212,170,60,0.4);}
+.clip__play{width:44px;height:44px;border:1px solid rgba(212,170,60,0.5);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(212,170,60,0.08);transition:all .3s;}
+.clip:hover .clip__play{background:var(--gold);}
+.clip:hover .clip__play svg{fill:var(--black);}
+.clip__play svg{fill:var(--gold);width:16px;height:16px;margin-left:3px;}
+.clip__dur{position:absolute;bottom:8px;left:8px;font-family:var(--font-mono);font-size:8px;color:var(--white);background:rgba(0,0,0,0.7);padding:2px 6px;letter-spacing:.08em;}
+.clip__info{padding:16px 18px;}
+.clip__tag{font-family:var(--font-mono);font-size:8px;color:var(--gold);letter-spacing:.2em;margin-bottom:6px;}
+.clip__title{font-family:var(--font-hero);font-size:17px;color:var(--white);margin-bottom:6px;line-height:1.05;}
+.clip__meta{font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:.08em;}
+@media(max-width:900px){.clips-grid{grid-template-columns:1fr 1fr;}.feat-screen{aspect-ratio:16/9;}}
+@media(max-width:580px){.clips-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="cur-dot"></div><div id="cur-ring"></div>
+<canvas id="three-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+<div id="loader"><div class="loader-title">CLIPS<div class="loader-fill">CLIPS</div></div><div class="loader-sub">// LOADING HIGHLIGHT ARCHIVE</div><div class="loader-bar-wrap"><div class="loader-bar"></div></div><div class="loader-pct">0%</div></div>
+<div id="ticker"><div class="ticker-tag">⚡ LIVE</div><div style="overflow:hidden;flex:1;display:flex;padding-left:20px;"><div class="ticker-track"><span class="ticker-item">VTX vs PHX <span class="w">13–8</span> · VALORANT MAP 2</span><span class="ticker-item">SEASON 4 HIGHLIGHT REEL · <span class="g">4.7M VIEWS</span></span><span class="ticker-item">VTX vs PHX <span class="w">13–8</span> · VALORANT MAP 2</span><span class="ticker-item">SEASON 4 HIGHLIGHT REEL · <span class="g">4.7M VIEWS</span></span></div></div></div>
+<nav id="nav">
+  <a href="../index.html" class="nav-logo"><div class="nav-logo-gem"></div>VORTEXA</a>
+  <ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="matches.html">Matches</a></li><li><a href="roster.html">Roster</a></li><li><a href="highlights.html" class="act">Highlights</a></li><li><a href="tournament.html">Tournament</a></li><li><a href="merch.html">Merch</a></li><li><a href="join.html">Join</a></li></ul>
+  <div class="nav-right"><div class="nav-status"><div class="nav-status-dot"></div>SEASON 4 LIVE</div><a href="join.html" class="btn btn-gold" style="padding:10px 24px;font-size:11px;">APPLY NOW</a></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero__bg-word">CLIPS</div>
+  <div class="gold-line ui-label" data-r="up" style="margin-bottom:12px;">Hall of Clips</div>
+  <h1 class="page-hero__title" data-r="up" data-delay="80">HIGHLIGHTS</h1>
+  <p style="font-family:var(--font-body);font-size:15px;font-weight:300;color:var(--muted2);margin-top:16px;max-width:500px;" data-r="up" data-delay="160">Season 4 best plays, clutch moments, and championship-defining kills.</p>
+</div>
+
+<div style="position:relative;z-index:2;background:var(--void);">
+  <!-- FEATURED -->
+  <div style="padding:60px var(--gutter) 0;">
+    <div class="gold-line ui-label" data-r="up" style="margin-bottom:32px;">Featured — Season 4 Montage</div>
+  </div>
+  <div class="feat-vid" data-r="fade">
+    <div class="feat-screen">
+      <img src="../assets/images/highlights-thumb.png" alt="Highlights" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.75;"/>
+      <div class="feat-overlay"></div>
+      <div class="hud-c hud-tl"></div><div class="hud-c hud-tr"></div><div class="hud-c hud-bl"></div><div class="hud-c hud-br"></div>
+      <div class="hud-lbl">VORTEXA // SEASON 4 — OFFICIAL HIGHLIGHT REEL</div>
+      <button class="play-btn" id="fpb"><div class="pr"></div><div class="pr"></div><div class="pr"></div><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="vstat-bar">
+      <div class="vstat"><span class="vstat__v">4.7M</span><div class="vstat__k">TOTAL VIEWS</div></div>
+      <div class="vstat"><span class="vstat__v" data-counter data-target="247">0</span><div class="vstat__k">CLIP COUNT</div></div>
+      <div class="vstat"><span class="vstat__v">98%</span><div class="vstat__k">CLUTCH RATE</div></div>
+      <div class="vstat"><span class="vstat__v">S4</span><div class="vstat__k">SEASON</div></div>
+    </div>
+  </div>
+
+  <!-- CLIP GRID -->
+  <div style="padding:60px var(--gutter) 0;">
+    <div class="gold-line ui-label" data-r="up" style="margin-bottom:32px;">All Clips</div>
+  </div>
+  <div class="clips-grid" style="margin:0 var(--gutter) 80px;">
+    <div class="clip" data-r="up"><div class="clip__thumb"><div class="clip__phc clip__phc-tl"></div><div class="clip__phc clip__phc-br"></div><div class="clip__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="clip__dur">0:47</div></div><div class="clip__info"><div class="clip__tag">VALORANT · CLUTCH</div><div class="clip__title">VOLT 1V4 ACE — HAVEN FINAL ROUND</div><div class="clip__meta">2.1M VIEWS · 3 DAYS AGO</div></div></div>
+    <div class="clip" data-r="up" data-delay="60"><div class="clip__thumb"><div class="clip__phc clip__phc-tl"></div><div class="clip__phc clip__phc-br"></div><div class="clip__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="clip__dur">1:12</div></div><div class="clip__info"><div class="clip__tag">CS2 · AWP</div><div class="clip__title">PHANTOM 4K AWP — MAJOR SEMIFINALS</div><div class="clip__meta">1.4M VIEWS · 5 DAYS AGO</div></div></div>
+    <div class="clip" data-r="up" data-delay="120"><div class="clip__thumb"><div class="clip__phc clip__phc-tl"></div><div class="clip__phc clip__phc-br"></div><div class="clip__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="clip__dur">0:33</div></div><div class="clip__info"><div class="clip__tag">LOL · TEAM FIGHT</div><div class="clip__title">BLAZE PENTAKILL — WORLDS QUALIFIER</div><div class="clip__meta">890K VIEWS · 1 WEEK AGO</div></div></div>
+    <div class="clip" data-r="up"><div class="clip__thumb"><div class="clip__phc clip__phc-tl"></div><div class="clip__phc clip__phc-br"></div><div class="clip__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="clip__dur">0:58</div></div><div class="clip__info"><div class="clip__tag">VALORANT · ENTRY</div><div class="clip__title">REAPER 3K IN 4 SECONDS — ASCENT A SITE</div><div class="clip__meta">1.7M VIEWS · 1 WEEK AGO</div></div></div>
+    <div class="clip" data-r="up" data-delay="60"><div class="clip__thumb"><div class="clip__phc clip__phc-tl"></div><div class="clip__phc clip__phc-br"></div><div class="clip__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="clip__dur">2:10</div></div><div class="clip__info"><div class="clip__tag">HIGHLIGHTS · WEEKLY</div><div class="clip__title">VORTEXA WEEK 14 — TOP 10 PLAYS</div><div class="clip__meta">3.2M VIEWS · 2 WEEKS AGO</div></div></div>
+    <div class="clip" data-r="up" data-delay="120"><div class="clip__thumb"><div class="clip__phc clip__phc-tl"></div><div class="clip__phc clip__phc-br"></div><div class="clip__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="clip__dur">0:22</div></div><div class="clip__info"><div class="clip__tag">ROCKET LEAGUE · AERIAL</div><div class="clip__title">IMPOSSIBLE DOUBLE TAP — RLCS REGIONAL</div><div class="clip__meta">620K VIEWS · 2 WEEKS AGO</div></div></div>
+  </div>
+</div>
+
+<footer id="footer">
+  <div class="footer-grid"><div><span class="footer-logo">VORT<span>E</span>XA</span><div class="footer-tag">// Signal. Speed. Supremacy.</div><div class="footer-socials"><a href="#" class="footer-soc">𝕏</a><a href="#" class="footer-soc">▶</a><a href="#" class="footer-soc">📸</a></div></div>
+  <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../index.html">Home</a></li><li><a href="matches.html">Matches</a></li><li><a href="roster.html">Roster</a></li></ul></div>
+  <div><div class="footer-col-title">Organization</div><ul class="footer-links"><li><a href="merch.html">Merch</a></li><li><a href="join.html">Join</a></li></ul></div>
+  <div><div class="footer-col-title">Support</div><ul class="footer-links"><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div></div>
+  <div class="footer-bottom"><div class="footer-copy">© 2026 VORTEXA ESPORTS.</div><div class="nav-status"><div class="nav-status-dot"></div>ALL SYSTEMS OPERATIONAL</div></div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="../js/three-bg.js"></script><script src="../js/core.js"></script>
+<script>
+(function(){
+  const c=document.getElementById('feat-canvas');
+  if(!c)return;
+  function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight;}
+  rs();window.addEventListener('resize',rs);
+  const ctx=c.getContext('2d');
+  const pts=Array.from({length:60},()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*1.5+.3,col:`hsla(${40+Math.random()*20},80%,${50+Math.random()*20}%,${Math.random()*.3+.1})`}));
+  let t=0;
+  function draw(){requestAnimationFrame(draw);t+=.003;ctx.fillStyle='rgba(5,5,7,0.15)';ctx.fillRect(0,0,c.width,c.height);for(let i=0;i<5;i++){const a=t*.4+i*(Math.PI*2/5);const g=ctx.createLinearGradient(c.width/2,c.height/2,c.width/2+Math.cos(a)*c.width*.7,c.height/2+Math.sin(a)*c.height*.7);g.addColorStop(0,'rgba(212,170,60,0.06)');g.addColorStop(1,'transparent');ctx.beginPath();ctx.moveTo(c.width/2,c.height/2);ctx.lineTo(c.width/2+Math.cos(a)*c.width*.7,c.height/2+Math.sin(a)*c.height*.7);ctx.strokeStyle=g;ctx.lineWidth=1;ctx.stroke();}pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx*=-1;if(p.y<0||p.y>c.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.fill();});}
+  draw();
+})();
+document.getElementById('fpb').addEventListener('click',function(){const p=this.querySelector('path');p.getAttribute('d')==='M8 5v14l11-7z'?(p.setAttribute('d','M6 19h4V5H6v14zm8-14v14h4V5h-4z'),this.style.background='rgba(212,170,60,0.2)'):(p.setAttribute('d','M8 5v14l11-7z'),this.style.background='rgba(212,170,60,0.1)');});
+</script>
+</body></html>
